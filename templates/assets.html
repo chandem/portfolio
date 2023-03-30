@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="my-4">Assets</h1>
+
+    <h3>Create Asset</h3>
+    <form method="POST" action="{{ url_for('assets') }}">
+        {{ form.csrf_token }}
+        <div class="form-group">
+            <label for="{{ form.asset_type.id }}">Asset Type</label>
+            {{ form.asset_type(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.location.id }}">Location</label>
+            {{ form.location(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.condition.id }}">Condition</label>
+            {{ form.condition(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.last_inspection_date.id }}">Last Inspection Date</label>
+            {{ form.last_inspection_date(class="form-control") }}
+        </div>
+        {{ form.submit(class="btn btn-primary") }}
+    </form>
+
+    <h3 class="mt-5">Assets List</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Asset Type</th>
+                <th>Location</th>
+                <th>Condition</th>
+                <th>Last Inspection Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for asset in assets %}
+                <tr>
+                    <td>{{ asset.id }}</td>
+                    <td>{{ asset.asset_type }}</td>
+                    <td>{{ asset.location }}</td>
+                    <td>{{ asset.condition }}</td>
+                    <td>{{ asset.last_inspection_date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

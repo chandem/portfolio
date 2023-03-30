@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="my-4">Inspections</h1>
+
+    <h3>Create Inspection</h3>
+    <form method="POST" action="{{ url_for('inspections') }}">
+        {{ form.csrf_token }}
+        <div class="form-group">
+            <label for="{{ form.asset_id.id }}">Asset ID</label>
+            {{ form.asset_id(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.inspector.id }}">Inspector</label>
+            {{ form.inspector(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.inspection_date.id }}">Inspection Date</label>
+            {{ form.inspection_date(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.condition.id }}">Condition</label>
+            {{ form.condition(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.notes.id }}">Notes</label>
+            {{ form.notes(class="form-control") }}
+        </div>
+        {{ form.submit(class="btn btn-primary") }}
+    </form>
+
+    <h3 class="mt-5">Inspections List</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Asset ID</th>
+                <th>Inspector</th>
+                <th>Inspection Date</th>
+                <th>Condition</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for inspection in inspections %}
+                <tr>
+                    <td>{{ inspection.id }}</td>
+                    <td>{{ inspection.asset_id }}</td>
+                    <td>{{ inspection.inspector }}</td>
+                    <td>{{ inspection.inspection_date }}</td>
+                    <td>{{ inspection.condition }}</td>
+                    <td>{{ inspection.notes }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

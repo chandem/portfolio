@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="my-4">Work Orders</h1>
+
+    <h3>Create Work Order</h3>
+    <form method="POST" action="{{ url_for('work_orders') }}">
+        {{ form.csrf_token }}
+        <div class="form-group">
+            <label for="{{ form.asset_id.id }}">Asset ID</label>
+            {{ form.asset_id(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.description.id }}">Description</label>
+            {{ form.description(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.priority.id }}">Priority</label>
+            {{ form.priority(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.status.id }}">Status</label>
+            {{ form.status(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.assigned_to.id }}">Assigned To</label>
+            {{ form.assigned_to(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.start_date.id }}">Start Date</label>
+            {{ form.start_date(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.end_date.id }}">End Date</label>
+            {{ form.end_date(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.inspection_id.id }}">Inspection ID</label>
+            {{ form.inspection_id(class="form-control") }}
+        </div>
+        {{ form.submit(class="btn btn-primary") }}
+    </form>
+
+    <h3 class="mt-5">Work Orders List</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Asset ID</th>
+                <th>Description</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Assigned To</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Inspection ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for work_order in work_orders %}
+                <tr>
+                    <td>{{ work_order.id }}</td>
+                    <td>{{ work_order.asset_id }}</td>
+                    <td>{{ work_order.description }}</td>
+                    <td>{{ work_order.priority }}</td>
+                    <td>{{ work_order.status }}</td>
+                    <td>{{ work_order.assigned_to }}</td>
+                    <td>{{ work_order.start_date }}</td>
+                    <td>{{ work_order.end_date }}</td>
+                    <td>{{ work_order.inspection_id }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
